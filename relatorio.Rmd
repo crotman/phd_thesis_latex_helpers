@@ -101,18 +101,19 @@ library(clipr)
 
 tabela <- parametros %>% 
     filter(type == "General") %>% 
+    select(-type) %>% 
     kable(
         format = "latex", 
         longtable = TRUE, 
         booktabs = TRUE,
         escape = FALSE,
-        caption = "General parameters of the simulation \label{tab_general_parameters}"
+        caption = r"(General parameters of the simulation \label{tab_general_parameters})"
     ) %>%
     kable_styling(
         latex_options = c("repeat_header", "striped")
     ) %>% 
     column_spec(
-        column = 2, width = "20em"
+        column = 2, width = "30em"
     ) %>% 
     row_spec(
         row = 1,
@@ -128,5 +129,113 @@ tabela <- parametros %>%
 ```
 
 
+
+```{r}
+
+
+tabela <- parametros %>% 
+    filter(type == "Development Phase") %>% 
+    select(-type) %>% 
+    kable(
+        format = "latex", 
+        longtable = TRUE, 
+        booktabs = TRUE,
+        escape = FALSE,
+        caption = r"(Parameters of the simulation for the Development Phase \label{tab_dev_parameters})"
+    ) %>%
+    kable_styling(
+        latex_options = c("repeat_header", "striped")
+    ) %>% 
+    column_spec(
+        column = 2, width = "30em"
+    ) %>% 
+    row_spec(
+        row = 1,
+        hline_after = TRUE
+    )
+        
+        
+    write_clip(tabela, allow_non_interactive = TRUE)
+    
+    print(tabela)
+
+
+```
+
+
+
+
+
+```{r}
+
+
+tabela <- parametros %>% 
+    filter(type == "Review Phase") %>% 
+    select(-type) %>% 
+    kable(
+        format = "latex", 
+        longtable = TRUE, 
+        booktabs = TRUE,
+        escape = FALSE,
+        caption = r"(Parameters of the simulation for the Review Phase \label{tab_rev_parameters})"
+    ) %>%
+    kable_styling(
+        latex_options = c("repeat_header", "striped")
+    ) %>% 
+    column_spec(
+        column = 2, width = "30em"
+    ) %>% 
+    row_spec(
+        row = 1,
+        hline_after = TRUE
+    )
+        
+        
+    write_clip(tabela, allow_non_interactive = TRUE)
+    
+    print(tabela)
+
+
+
+```
+
+
+
+
+```{r}
+
+
+tabela <- parametros %>% 
+    filter(type == "Meta-Review Phase") %>% 
+    select(-type) %>% 
+    kable(
+        format = "latex", 
+        longtable = TRUE, 
+        booktabs = TRUE, 
+        escape = FALSE,
+        caption = r"(Parameters of the simulation for the Meta-
+        Review Phase \label{tab_meta_parameters})"
+    ) %>%
+    kable_styling(
+        latex_options = c("repeat_header", "striped")
+    ) %>% 
+    column_spec(
+        column = 2, width = "30em"
+    ) %>% 
+    row_spec(
+        row = 1,
+        hline_after = TRUE
+    )
+        
+        
+    write_clip(tabela, allow_non_interactive = TRUE)
+    
+    print(tabela)
+
+
+
+
+ 
+```
 
 
