@@ -1,0 +1,132 @@
+---
+title: "relatorio"
+author: "teste"
+date: "07/09/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+
+library(tidyverse)
+library(kableExtra)
+library(clipr)
+
+```
+
+
+
+
+```{r}
+
+
+
+
+    parametros <- tribble(
+        ~type, ~Parameter, ~Description,
+        
+        "General", r"($\eta$)", r"(Relative increase in the mean time to develop, review, and meta-review when a code from a kludgy task is merged to the code-base.)",
+        
+        "General", r"($\lambda$)", r"(The tasks' interarrival times are exponentially distributed with rate $\lambda$.)",
+
+
+        "Development Phase", r"($\mu D|(D,!RW)$)", r"(Mean time a Diligent developer takes to develop a task that is not a rework when there are no kludges in the codebase.)",
+        
+        "Development Phasev", r"($\mu D|(D,RW)$)", r"(Same as $\mu D|(D,!RW)$, but for reworking tasks found \textit{kludgy} in the Review phase.)",
+        
+        "Development Phase", r"($\mu D|(K,!RW)$)", r"(Same as $\mu D|(D,!RW)$, but for developers who are being Kludgy instead of Diligent.)",
+        
+        "Development Phase", r"($\mu D|(K,RW)$)", r"(Same as $\mu D|(D,RW)$, but for developers who are being Kludgy instead of Diligent.)",
+        
+        "Development Phase", r"($\sigma D|(!RW)$)", r"(Standard deviation of the time required to develop a task that is not a rework.)",
+        
+        "Development Phase", r"($\sigma D|(RW)$)", r"(Same as $\sigma D|(!RW)$, but for reworking tasks found \textit{kludgy} in the Review phase.)",
+         
+        "Development Phase", r"($P(KT|D)$)", r"(Probability that a task has a kludge when the developer is being Diligent.)",
+        
+        "Development Phase", r"($P(KT|K)$)", r"(Probability that a task has a kludge when the developer is being Kludgy.)",
+        
+        
+        "Review Phase", r"($P(R)$)", r"(Probability that a task goes to review.)",
+        
+        "Review Phase", r"($\mu R$)", r"(Mean time to perform a review.)",
+        
+        "Review Phase", r"($\sigma R$)", r"(Standard deviation of the time to perform a review.)",
+
+        "Review Phase", r"($P(FN|C)$)", r"(Probability of false negatives when a Careful reviewer is trying to detect kludges in a task that has a kludge.)",
+         
+        "Review Phase", r"($P(FN|N)$)", r"(Probability of false negatives when a Negligent reviewer is trying to detect kludge in a task that has a kludge.)",
+                
+        "Review Phase", r"($P(FP|C)$)", r"(Probability of false positive when a Careful reviewer is trying to detect a kludge in a task that does not have a kludge.)",
+
+        "Review Phase", r"($P(FP|N)$)", r"(Probability of false positive when a Negligent reviewer is trying to detect a kludge in a task that does not have a kludge.)",
+
+        
+                
+        "Meta-Review Phase", r"($P(M|R)$)", r"(Probability that a reviewed task goes to meta-review.)",
+        
+        "Meta-Review Phase", r"($\mu M$)", r"(Mean time to perform a meta-review.)",
+
+        "Meta-Review Phase", r"($\sigma M$)", r"(Standard deviation of the time to perform a meta-review.)",
+        
+        "Meta-Review Phase", r"($P(-|(KT,TP,A))$)", r"(Probability of a bad meta-review when the task has a kludge, the review is a True Positive, and the meta-reviewer is Accurate.)",
+        
+        "Meta-Review Phase", r"($P(-|(KT,FN,A))$)", r"(Probability of a bad meta-review when the task has a kludge, the review is a False Negative, and the meta-reviewer is Accurate.)",
+
+        "Meta-Review Phase", r"($P(-|(!KT,FP,A))$)", r"(Probability of a bad meta-review when the task has a kludge, the review is a False Positive, and the meta-reviewer is Accurate.)",
+        
+        "Meta-Review Phase", r"($P(-|(!KT,TN,A))$)", r"(Probability of a bad meta-review when the task has a kludge, the review is a True Negative, and the meta-reviewer is Accurate.)",
+        
+        "Meta-Review Phase", r"($P(-|(KT,TP,I))$)", r"(Probability of a bad meta-review when the task has a kludge, the review is a True Positive, and the meta-reviewer is Inaccurate.)",
+        
+        "Meta-Review Phase", r"($P(-|(KT,FN,I))$)", r"(Probability of a bad meta-review when the task has a kludge, the review is a False Negative, and the meta-reviewer is Inaccurate.)",
+                
+        "Meta-Review Phase", r"($P(-|(!KT,FP,I))$)", r"(Probability of a bad meta-review when the task has a kludge, the review is a False Positive, and the meta-reviewer is Inaccurate.)",
+        
+        "Meta-Review Phase", r"($P(-|(!KT,TN,I))$)", r"(Probability of a bad meta-review when the task has a kludge, the review is a True Negative, and the meta-reviewer is Inaccurate.)",
+    )
+
+
+
+
+```
+
+
+
+
+
+```{r, results='asis'}
+
+
+tabela <- parametros %>% 
+    filter(type == "General") %>% 
+    kable(
+        format = "latex", 
+        longtable = TRUE, 
+        booktabs = TRUE,
+        escape = FALSE,
+        caption = "General parameters of the simulation \label{tab_general_parameters}"
+    ) %>%
+    kable_styling(
+        latex_options = c("repeat_header", "striped")
+    ) %>% 
+    column_spec(
+        column = 2, width = "20em"
+    ) %>% 
+    row_spec(
+        row = 1,
+        hline_after = TRUE
+    )
+        
+        
+    write_clip(tabela, allow_non_interactive = TRUE)
+    
+    print(tabela)
+
+
+```
+
+
+
+

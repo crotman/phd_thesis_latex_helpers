@@ -27,7 +27,7 @@ cria_tabela_parametros <-  function(){
         r"($\phi$)", r"(Probability of false negatives(FN) when a reviewer is trying to detect kludge in a commit and is being Careful)",
         
         r"($\Delta\phi$)", r"(Increase in the probability of false negatives(FN) when a reviewer is detecting kludge in a commit and is being Negligent)",
-        
+         
         
 
     ) %>% 
