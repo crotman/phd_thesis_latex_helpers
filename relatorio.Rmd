@@ -29,6 +29,8 @@ library(clipr)
         "General", r"($\eta$)", r"(Relative increase in the mean time to develop, review, and meta-review when a code from a kludgy task is merged to the code-base.)",
         
         "General", r"($\lambda$)", r"(The tasks' interarrival times are exponentially distributed with rate $\lambda$.)",
+        
+        "General", r"($\tau$)", r"(Simulation's total time.)",
 
 
         "Development Phase", r"($\mu D|(D,!RW)$)", r"(Mean time a Diligent developer takes to develop a task that is not a rework when there are no kludges in the codebase.)",
@@ -238,4 +240,44 @@ tabela <- parametros %>%
  
 ```
 
+
+```{r}
+
+
+    parametros <- tribble(
+        ~Characteristic, ~Description,
+        "Autonomous agents",         "The development team is composed of autonomous agents.",                                                                                                   
+        "Actions"   ,              "Agents have their interests, and their work consists of a series of selected actions.",                                                                    
+        "Uncertainty",            "There is uncertainty about the outcomes and deadlines because we do not know precisely how long it will take to develop a new feature, for instance.",     
+        "Temporality",             "Temporality is essential since a Software Development Process evolves during a long sequence of actions that create consequences throughout the process.",
+        "Cooperation and conflict", "Agents sometimes cooperate, however they maximize their own reward, therefore in under some conditions they may conflict.",                                
+        "Partial information",   "Agents have only partial information about the process.",                                                                                                  
+        "Central Authority",    "There is frequently a central authority that has the power to establish rules for rewards and for the interaction between the agents."
+    )        
+
+
+tabela <- parametros %>% 
+    kable(
+        format = "latex", 
+        longtable = TRUE, 
+        booktabs = TRUE, 
+        escape = FALSE,
+        caption = r"(Characteristics of Software Development Processes that can be modelled by game theory)",
+        label = "tab:characteristics"
+    ) %>%
+    kable_styling(
+        latex_options = c("repeat_header", "striped")
+    ) %>% 
+    column_spec(
+        column = 2, width = "23em"
+    ) 
+
+        
+    write_clip(tabela, allow_non_interactive = TRUE)
+    
+    print(tabela)
+
+
+
+```
 
